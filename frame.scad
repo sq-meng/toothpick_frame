@@ -152,7 +152,7 @@ module tab(hole_sp_all, hole_dia_all, thickness){
                 }
         };
         
-        cylinder(d=d_bracket, h=20, center=true);
+        cylinder(d=d_bracket - 0.2, h=20, center=true);
     }
 }
 
@@ -172,15 +172,20 @@ module sidehole(){
     }
 }
 
-module side_tab(dist, width, t1, t2){
+module side_tab(dist, width, t1, t2, hole_y, hole_x, hole_size){
     module hull_anchor(x, y, t){
         translate([x, y, 0])cylinder(h=t, d=4);
         }
-        hull(){
-            hull_anchor(-width/2, d_bracket/2 + dist, t1);
-            hull_anchor(width/2, d_bracket/2 + dist, t1);
-            hull_anchor(-width/2 - 5, 0, t2);
-            hull_anchor(width/2 + 5, 0, t2);
+        difference(){
+            hull(){
+                hull_anchor(-width/2, d_bracket/2 + dist, t1);
+                hull_anchor(width/2, d_bracket/2 + dist, t1);
+                hull_anchor(-width/2 - 5, 0, t2);
+                hull_anchor(width/2 + 5, 0, t2);
+            }
+            for (i=[0: len(hole_y) -1]) {
+                translate([hole_x[i], d_bracket/2 + hole_y[i], 0])cylinder(d=hole_size[i], h=10, center=true);
+            }
         }
 }
 
@@ -194,7 +199,7 @@ module fuselage_outside(){
     arms(arms_positions);
     cylinder(h=arm_height,d=d_bracket);
     sideholes();
-    side_tab(6, 12, 1, 2);
+    side_tab(6, 12, 1, 2, [4.5], [0], [2.1]);
     }
     
 
