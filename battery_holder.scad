@@ -2,8 +2,8 @@ $fn=51;
 c = 30.5 / 2;
 dy=9;
 dx=8;
-th = 0.8;
-sink = -4;
+th = 1.6;
+sink = -6;
 module tab_c(){
     translate([-4.5, 0, 0])
       rotate(90, [1, 0, 0])
@@ -19,6 +19,17 @@ module tab(){
     }
     hull(){
         tab_c();
+        translate([0, 0, sink])tab_c();
+        }
+    hull(){
+        tab_c();
+        translate([0, 0, -1])tab_c();
+        translate([1, 0, 0])tab_c();
+        }
+    hull(){
+        translate([-1.5, 0, 0])tab_c();
+        translate([-1.5, 0, sink])tab_c();
+        translate([0, 0, 0])tab_c();
         translate([0, 0, sink])tab_c();
         }
 }
@@ -48,5 +59,5 @@ union(){
         translate([-dx, -dy, sink])sphere(d=th);
         }    
     }
-    cube([10, 12, 15], center=true);    
+    //cube([6, 8, 15], center=true);    
 }
