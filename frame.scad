@@ -12,8 +12,9 @@ fc_pad_height = 2;
 support_height=1.6;
 support_width=2;
 
-motor_pad_height = 4;
+motor_pad_height = 3;
 motor_pad_rim_th = 1.2;
+pad_rim_height = 3.2;
 motor_holes = 4;
 motor_hole_dia = 2.1;
 motor_hole_space_dia = 12;
@@ -22,11 +23,11 @@ motor_center_hole = 6;
 
 
 arm_th = 1.2;
-bracket_th = 2;
+bracket_th = 2.4;
 arm_th_bottom = 1.2;
 arm_height = 8;
 arm_height_end = 5;
-pad_rim_height = 4.2;
+
 mnt_offsets = [45, 45];
 mnt_hole_dias = [2.1, 3.1];
 mnt_hole_distances = [20, 30.5];
@@ -173,8 +174,16 @@ module sidehole(){
 }
 
 module side_tab(dist, width, t1, t2, hole_y, hole_x, hole_size){
-    module hull_anchor(x, y, t){
-        translate([x, y, 0])cylinder(h=t, d=4);
+    module hull_anchor(x, y, t, d=4){
+        translate([x, y, 0])cylinder(h=t, d=d);
+        }
+        hull(){
+            hull_anchor(-width/2, d_bracket/2 + dist, t1, 3);
+            hull_anchor(-width/2 , d_bracket/2, arm_height, 3);
+        }
+        hull(){
+            hull_anchor(width/2, d_bracket/2 + dist, t1, 3);
+            hull_anchor(width/2 , d_bracket/2, arm_height, 3);
         }
         difference(){
             hull(){
@@ -199,7 +208,7 @@ module fuselage_outside(){
     arms(arms_positions);
     cylinder(h=arm_height,d=d_bracket);
     sideholes();
-    side_tab(6, 12, 1, 2, [4.5], [0], [2.1]);
+    side_tab(6, 12, 2, 2, [4.5], [0], [2.1]);
     }
     
 
