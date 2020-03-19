@@ -16,16 +16,16 @@ motor_pad_height = 3;
 motor_pad_rim_th = 1.2;
 pad_rim_height = 3.2;
 motor_holes = 4;
-motor_hole_dia = 2.1;
+motor_hole_dia = 2.15;
 motor_hole_space_dia = 12;
 motor_hole_offset = 0;
 motor_center_hole = 6;
 
 
-arm_th = 1.2;
-bracket_th = 2.4;
-arm_th_bottom = 1.2;
-arm_height = 8;
+arm_th = 2.4;
+bracket_th = 2.8;
+arm_th_bottom = 2.4;
+arm_height = 7;
 arm_height_end = 5;
 
 mnt_offsets = [45, 45];

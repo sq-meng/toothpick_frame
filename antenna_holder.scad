@@ -22,21 +22,21 @@ difference(){
             intersection(){
                 union()
                 {
-                tube_o(-7.5, [1, 1, 0]);
-                tube_o(7.5,[1, -1, 0]);
+                tube_o(-9, [1, 1, 0]);
+                tube_o(9,[1, -1, 0]);
                 }
                 translate([0, 0, 0.6])cube([50, 50, 1.2], center=true);
                 
             }
-            translate([0, -5, 0])cylinder(d=6.4, h=1.2);
+            translate([0, -7, 0])cylinder(d=6.4, h=1.2);
         }
-        tube_o(-7.5, [1, 1, 0]);
-        tube_o(7.5,[1, -1, 0]);
+        tube_o(-9, [1, 1, 0]);
+        tube_o(9,[1, -1, 0]);
         }
         translate([0, 0, 25])cube([50, 50, 50], center=true);
     }
-    tube_i(-7.5, [1, 1, 0]);
-    tube_i(7.5,[1, -1, 0]);
-    translate([0, -5, 0])cylinder(d=3.2, h=5, center=true);
+    tube_i(-9, [1, 1, 0]);
+    tube_i(9,[1, -1, 0]);
+    translate([0, -7, 0])cylinder(d=3.2, h=5, center=true);
 
 }
