@@ -12,9 +12,9 @@ fc_pad_height = 2;
 support_height=1.6;
 support_width=2;
 
-motor_pad_height = 3;
+motor_pad_height = 4;
 motor_pad_rim_th = 1.2;
-pad_rim_height = 3.2;
+pad_rim_height = 4.2    ;
 motor_holes = 4;
 motor_hole_dia = 2.15;
 motor_hole_space_dia = 12;
