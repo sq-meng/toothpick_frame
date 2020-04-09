@@ -1,5 +1,7 @@
 $fn=31;
 
+frame_size = 200;
+
 module motor_holder(d_pad=20, pad_thickness=3, hole_spacing=12, hole_dia=2.15, center_hole_dia=5, no_holes=4, hole_offset=45, rim_thickness=0.6, d_rim=24, spar_dia=5, dual_spar=false, spar_hor_spacing=15, spar_holder_thickness=2, spar_holder_length=10, spar_height=7, spar_backout=10)
 {   
     echo("spar height from ", spar_height - spar_dia / 2, " to ", spar_height + spar_dia / 2);
@@ -68,7 +70,8 @@ module motor_holder(d_pad=20, pad_thickness=3, hole_spacing=12, hole_dia=2.15, c
 }
 
 
-module fuselage(main_dia=56, h_thk=1.6, v_thk=4, mounting_holes_dia=[2, 3.2], mounting_holes_pos=[20, 30.5], mount_hole_offset=45, spar_heights=[7, 13, 7, 13], spar_dia=5, spar_hor_spacing=15, dual_spar=false, arm_offset=45, spar_holder_extend=4)
+
+module fuselage(main_dia=56, h_thk=2, v_thk=5, mounting_holes_dia=[2, 3.2], mounting_holes_pos=[20, 30.5], mount_hole_offset=45, spar_heights=[7, 13, 7, 13], spar_dia=5, spar_hor_spacing=15, dual_spar=false, arm_offset=45, spar_holder_extend=4)
 {
    module body(){
        cylinder(d=main_dia, h=v_thk);
@@ -119,16 +122,22 @@ module fuselage(main_dia=56, h_thk=1.6, v_thk=4, mounting_holes_dia=[2, 3.2], mo
        body();
        body_cutout();
        }
+   num = len(spar_heights);
    for (i=[0: 3]){
-       rotate(i * 90 + mount_hole_offset, [0, 0, 1])fc_tab();
+       rotate(i * 360/4 + mount_hole_offset, [0, 0, 1])fc_tab();
        }
-   for (i=[0: 3]){
-       rotate(i * 90 + mount_hole_offset, [0, 0, 1])spar_holder(spar_heights[i], spar_dia);
+   for (i=[0: num - 1]){
+       rotate(i * 360/num + mount_hole_offset, [0, 0, 1])spar_holder(spar_heights[i], spar_dia);
        }
 }
 
+
+module spacer_bar(d_pad=20, main_dia=56, frame_size=200){
+    translate([-0.8, main_dia/2, 0])cube([1.6, (frame_size - main_dia - d_pad) / 2 + 1, 1]);
+    }
 fuselage();
 for (i=[0:3]) {
     h = [7, 13, 7, 13];
-    rotate(i*90 + 45)translate([0, 100, 0])motor_holder(spar_height=h[i]);
+    rotate(i*90 + 45)translate([0, frame_size/2, 0])motor_holder(spar_height=h[i]);
+    rotate(i*90 + 45)spacer_bar();
 }
