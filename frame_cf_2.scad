@@ -1,7 +1,10 @@
-$fn=51;
-
+$fn=31;
+$vpr = [90, 0, -45];
+p_spar_dia = 4.1;
 p_frame_size = 200;
-p_spar_heights = [8, 14, 8, 14];
+
+p_dual_spar=false;
+p_spar_heights = [7, 11.2, 7, 11.2];
 
 module motor_holder(d_pad=20, pad_thickness=3, hole_spacing=12, hole_dia=2.15, center_hole_dia=5, no_holes=4, hole_offset=45, rim_thickness=0.6, d_rim=24, spar_dia=5, dual_spar=false, spar_hor_spacing=15, spar_holder_thickness=2, spar_holder_length=10, spar_height=7, spar_backout=10)
 {   
@@ -137,8 +140,8 @@ module spacer_bar(d_pad=20, main_dia=56, frame_size=200){
     translate([-0.8, main_dia/2, 0])cube([1.6, (frame_size - main_dia - d_pad) / 2 + 1, 1]);
     }
 
-fuselage(spar_heights=p_spar_heights);
+fuselage(spar_heights=p_spar_heights, spar_dia=p_spar_dia, dual_spar=p_dual_spar);
 for (i=[0:len(p_spar_heights) - 1]) {
-    rotate(i*360/len(p_spar_heights) + 45)translate([0, p_frame_size/2, 0])motor_holder(spar_height=p_spar_heights[i]);
+    rotate(i*360/len(p_spar_heights) + 45)translate([0, p_frame_size/2, 0])motor_holder(spar_height=p_spar_heights[i], spar_dia=p_spar_dia, dual_spar=p_dual_spar);
     rotate(i*360/len(p_spar_heights) + 45)spacer_bar();
 }
