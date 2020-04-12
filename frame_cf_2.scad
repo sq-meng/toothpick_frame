@@ -5,7 +5,7 @@ p_frame_size = 200;
 
 p_dual_spar=false;
 p_spar_heights = [8.2, 14.5, 8.2, 14.5];
-p_pad_thickness=4;
+p_pad_thickness=3;
 
 module motor_holder(d_pad=20, pad_thickness=3, hole_spacing=12, hole_dia=2.15, center_hole_dia=5, no_holes=4, hole_offset=45, rim_thickness=0.6, d_rim=24, spar_dia=5, dual_spar=false, spar_hor_spacing=15, spar_holder_thickness=2, spar_holder_length=10, spar_height=7, spar_backout=10)
 {   
@@ -76,7 +76,7 @@ module motor_holder(d_pad=20, pad_thickness=3, hole_spacing=12, hole_dia=2.15, c
 
 
 
-module fuselage(main_dia=56, h_thk=2, v_thk=5, mounting_holes_dia=[2, 3.2], mounting_holes_pos=[20, 30.5], mount_hole_offset=45, spar_heights=[8, 14, 8, 14], spar_dia=5, spar_hor_spacing=15, dual_spar=false, arm_offset=45, spar_holder_extend=2, rim=true, rim_inner=2, rim_outer=2, rim_v_thk=2)
+module fuselage(main_dia=56, h_thk=2, v_thk=5, mounting_holes_dia=[2, 3.2], fc_tab_v_thk=1.6, mounting_holes_pos=[20, 30.5], mount_hole_offset=45, spar_heights=[8, 14, 8, 14], spar_dia=5, spar_hor_spacing=15, dual_spar=false, arm_offset=45, spar_holder_extend=2, rim=true, rim_inner=2, rim_outer=2, rim_v_thk=1.6)
 {
    module body(){
        cylinder(d=main_dia, h=v_thk);
@@ -89,9 +89,9 @@ module fuselage(main_dia=56, h_thk=2, v_thk=5, mounting_holes_dia=[2, 3.2], moun
            intersection(){
                body();
                hull(){
-                    translate([0, mounting_holes_pos[0]/2 * 1.4142, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=2);
-                    translate([8, mounting_holes_pos[0]/2 * 1.4142 + 20, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=2);
-                    translate([-8, mounting_holes_pos[0]/2 * 1.4142 + 20, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=2);
+                    translate([0, mounting_holes_pos[0]/2 * 1.4142, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=fc_tab_v_thk);
+                    translate([8, mounting_holes_pos[0]/2 * 1.4142 + 20, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=fc_tab_v_thk);
+                    translate([-8, mounting_holes_pos[0]/2 * 1.4142 + 20, 0])cylinder(d=mounting_holes_dia[0] + 2.4, h=fc_tab_v_thk);
                }
                }
            for (i=[0: len(mounting_holes_dia) -1]){
@@ -112,8 +112,8 @@ module fuselage(main_dia=56, h_thk=2, v_thk=5, mounting_holes_dia=[2, 3.2], moun
            hull(){
                translate([0, main_dia/2, 1])cube([spar_dia + 4 + spar_height * 0.4, spar_holder_extend * 2 , 2], center=true);
                if (dual_spar){
-                   translate([spar_hor_spacing/2, 0, spar_height])rotate(-90, [1, 0, 0])cylinder(h=main_dia / 2 + 5, d=spar_dia + 4);
-                   translate([-spar_hor_spacing/2, 0, spar_height])rotate(-90, [1, 0, 0])cylinder(h=main_dia / 2 + 5, d=spar_dia + 4);
+                   translate([spar_hor_spacing/2, 0, spar_height])rotate(-90, [1, 0, 0])cylinder(h=main_dia / 2 + spar_holder_extend, d=spar_dia + 4);
+                   translate([-spar_hor_spacing/2, 0, spar_height])rotate(-90, [1, 0, 0])cylinder(h=main_dia / 2 + spar_holder_extend, d=spar_dia + 4);
                    } else {
                    translate([0, 0, spar_height])rotate(-90, [1, 0, 0])cylinder(h=main_dia / 2 + spar_holder_extend, d=spar_dia + 4);
                    }
@@ -152,3 +152,5 @@ for (i=[0:len(p_spar_heights) - 1]) {
     rotate(i*360/len(p_spar_heights) + 45)translate([0, p_frame_size/2, 0])motor_holder(spar_height=p_spar_heights[i], spar_dia=p_spar_dia, dual_spar=p_dual_spar, pad_thickness=p_pad_thickness);
     rotate(i*360/len(p_spar_heights) + 45)spacer_bar();
 }
+
+//translate([100 / 1.414, 100 / 1.414, -10])cylinder(d=5*25.4, h=1);
