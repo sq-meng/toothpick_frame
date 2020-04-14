@@ -1,5 +1,5 @@
 $fn=51;
-module testBoard(d_center=6, step=0.1, no=5){
+module testBoard(d_center=6.2, step=0.1, no=7){
     difference(){
         cube([d_center * no + 2.5 * (no + 1), 5, d_center + 4]);
         for (i=[0:no-1]){

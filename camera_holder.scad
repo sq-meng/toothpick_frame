@@ -1,12 +1,12 @@
 screw_hole = 2.1;
-w = 14;
+w = 14.5;
 h = 11;
 t = 1.6;
 
 $fn=31;
 
 module rod(){
-    translate([-h, 1, 0])rotate(90, [1, 0, 0])cylinder(d=t, h=6, center=true);
+    translate([-h, 1, 0])rotate(90, [1, 0, 0])cylinder(d=t, h=10, center=true);
     }
 
 module side(){

@@ -1,6 +1,6 @@
 $fn=41;
 //$vpr = [90, 0, -45];
-p_spar_dia = 6.2;
+p_spar_dia = 6.18;
 p_frame_size = 200;
 
 p_dual_spar=false;
@@ -147,10 +147,15 @@ module spacer_bar(d_pad=20, main_dia=56, frame_size=200){
     translate([-0.8, main_dia/2, 0])cube([1.6, (frame_size - main_dia - d_pad) / 2 + 1, 1]);
     }
 
-fuselage(spar_heights=p_spar_heights, spar_dia=p_spar_dia, dual_spar=p_dual_spar);
+//fuselage(spar_heights=p_spar_heights, spar_dia=p_spar_dia, dual_spar=p_dual_spar);
+module arms(){
 for (i=[0:len(p_spar_heights) - 1]) {
     rotate(i*360/len(p_spar_heights) + 45)translate([0, p_frame_size/2, 0])motor_holder(spar_height=p_spar_heights[i], spar_dia=p_spar_dia, dual_spar=p_dual_spar, pad_thickness=p_pad_thickness);
     rotate(i*360/len(p_spar_heights) + 45)spacer_bar();
 }
+}
 
+for (i=[0:len(p_spar_heights) - 1]){
+    translate([30 * i, 0, 0])motor_holder(spar_height=p_spar_heights[i], spar_dia=p_spar_dia, dual_spar=p_dual_spar, pad_thickness=p_pad_thickness);
+    }
 //translate([100 / 1.414, 100 / 1.414, -10])cylinder(d=5*25.4, h=1);
