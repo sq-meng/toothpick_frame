@@ -11,14 +11,14 @@ module t1(s=1){
     }
 
 module t2(){
-    translate([0, 9, 0])
+    translate([0, 6.5, 0])
     rotate(60, [0, 0, -1])
     rotate(50, [1, 0, 0])
     
     children();
     }
 
-module rod(d=6.3, round=0.6, h=60){
+module rod(d=6.3, round=0.6, h=50){
     cylinder(d1=d, d2=d, h=h, center=true);
 //    hull(){
 //        for (i=[0:5]){
@@ -34,10 +34,10 @@ module cutout(d=3){
     //translate([-1.5, -3, 0])cube([6, 6, 80], center=true);
     hull(){
         d=10;
-    translate([0, -d/2, 17])sphere(d=d);
-    translate([0, -d/2, -40])sphere(d=d);
+    translate([0, -d/2, 12])sphere(d=d);
+    translate([0, -d/2, 10])sphere(d=d);
         }
-        translate([0, -5, 0])cube([0.6, 10, 80], center=true);
+        translate([0, -5, 40 + 10])cube([0.6, 10, 80], center=true);
     }
     
 module cutout2(){
