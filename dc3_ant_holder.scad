@@ -18,22 +18,26 @@ module t2(){
     children();
     }
 
-module rod(d=6, round=0.6, h=40){
-    //cylinder(d1=d, d2=d, h=h, center=true);
-    hull(){
-        for (i=[0:5]){
-            rotate(60 * i, [0, 0, 1])
-            translate([-(d/2 - round/2), (d/2 - round/2) * tan(30), 0])
-            cylinder(d=round, h=h, center=true);
-            }
-        }
+module rod(d=6.3, round=0.6, h=60){
+    cylinder(d1=d, d2=d, h=h, center=true);
+//    hull(){
+//        for (i=[0:5]){
+//            rotate(60 * i, [0, 0, 1])
+//            translate([-(d/2 - round/2), (d/2 - round/2) * tan(30), 0])
+//            cylinder(d=round, h=h, center=true);
+//            }
+//        }
     }
 
 module cutout(d=3){
     cylinder(d=d, h=70, center=true);
     //translate([-1.5, -3, 0])cube([6, 6, 80], center=true);
-    //translate([0, -4, 0])cylinder(d=8, h=80, center=true);
-    translate([0, -5, 0])cube([1, 10, 80], center=true);
+    hull(){
+        d=10;
+    translate([0, -d/2, 17])sphere(d=d);
+    translate([0, -d/2, -40])sphere(d=d);
+        }
+        translate([0, -5, 0])cube([0.6, 10, 80], center=true);
     }
     
 module cutout2(){
